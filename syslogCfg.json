@@ -1,0 +1,548 @@
+[
+	{
+		"name":"Sweden",
+		"cities":[
+			{
+				"name":"Lund",
+				"config":{
+					"syslog-1":"10.67.1.113",
+					"syslog-2":"10.67.1.114"
+				}
+			},
+			{
+				"name":"Sunne",
+				"config":{
+					"syslog-1":"10.70.37.12",
+					"syslog-2":"10.70.37.13"
+				}
+			},
+			{
+				"name":"Skoghall",
+				"config":{
+					"syslog-1":"10.70.225.112",
+					"syslog-2":"10.70.225.113"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"USA",
+		"cities":[
+			{
+				"name":"Denton",
+				"config":{
+					"syslog-1":"10.192.8.11",
+					"syslog-2":"10.192.8.12"
+				}
+			},
+			{
+				"name":"Vancouver",
+				"config":{
+					"syslog-1":"10.194.193.92",
+					"syslog-2":"10.194.193.93"
+				}
+			},
+			{
+				"name":"Sikeston",
+				"config":{
+					"syslog-1":"10.194.177.40",
+					"syslog-2":"10.194.177.41"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Singapore",
+		"cities":[
+			{
+				"name":"Jurong",
+				"config":{
+					"syslog-1":"10.138.4.134",
+					"syslog-2":"10.138.4.135"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Argentina",
+		"cities":[
+			{
+				"name":"La Rioja",
+				"config":{
+					"syslog-1":"10.197.16.42",
+					"syslog-2":"10.197.16.43"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"China",
+		"cities":[
+			{
+				"name":"Shanghai",
+				"config":{
+					"syslog-1":"10.128.1.201",
+					"syslog-2":"10.128.1.202"
+				}
+			},
+			{
+				"name":"Hohhot",
+				"config":{
+					"syslog-1":"10.129.80.79",
+					"syslog-2":"10.129.80.80"
+				}
+			},
+			{
+				"name":"Beijing",
+				"config":{
+					"syslog-1":"10.128.69.30",
+					"syslog-2":"10.128.69.31"
+				}
+			},
+			{
+				"name":"Kunshan",
+				"config":{
+					"syslog-1":"10.128.129.221",
+					"syslog-2":"10.128.129.222"
+				}
+			},
+			{
+				"name":"Foshan",
+				"config":{
+					"syslog-1":"10.128.192.179",
+					"syslog-2":"10.128.192.180"
+				}
+			},
+			{
+				"name":"Hohhot",
+				"config":{
+					"syslog-1":"10.128.1.201",
+					"syslog-2":"10.128.1.202"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Brazil",
+		"cities":[
+			{
+				"name":"Monte Mor",
+				"config":{
+					"syslog-1":"10.198.8.11",
+					"syslog-2":"10.198.8.12"
+				}
+			},
+			{
+				"name":"Ponta Grossa",
+				"config":{
+					"syslog-1":"10.198.39.27",
+					"syslog-2":"10.198.39.28"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Finland",
+		"cities":[
+			{
+				"name":"Imatra",
+				"config":{
+					"syslog-1":"10.97.16.225",
+					"syslog-2":"10.97.16.226"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"France",
+		"cities":[
+			{
+				"name":"Dijon",
+				"config":{
+					"syslog-1":"10.76.17.17",
+					"syslog-2":"10.76.17.18"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Germany",
+		"cities":[
+			{
+				"name":"Limburg",
+				"config":{
+					"syslog-1":"10.78.112.52",
+					"syslog-2":"10.78.112.53"
+				}
+			},
+			{
+				"name":"Berlin",
+				"config":{
+					"syslog-1":"10.78.81.26",
+					"syslog-2":"10.78.81.27"
+				}
+			},
+			{
+				"name":"Stuttgart",
+				"config":{
+					"syslog-1":"10.78.160.131",
+					"syslog-2":"10.78.160.132"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Hungary",
+		"cities":[
+			{
+				"name":"Budaors",
+				"config":{
+					"syslog-1":"10.97.130.150",
+					"syslog-2":"10.97.130.151"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"India",
+		"cities":[
+			{
+				"name":"Chakan",
+				"config":{
+					"syslog-1":"10.147.64.74",
+					"syslog-2":"10.147.64.75"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Italy",
+		"cities":[
+			{
+				"name":"Modena",
+				"config":{
+					"syslog-1":"10.80.100.204",
+					"syslog-2":"10.80.100.213"
+				}
+			},
+			{
+				"name":"Rubiera",
+				"config":{
+					"syslog-1":"10.81.66.83",
+					"syslog-2":"10.81.66.84"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Japan",
+		"cities":[
+			{
+				"name":"Gotemba",
+				"config":{
+					"syslog-1":"10.160.0.199",
+					"syslog-2":"10.160.0.200"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Kenya",
+		"cities":[
+			{
+				"name":"Nairobi",
+				"config":{
+					"syslog-1":"10.101.128.63",
+					"syslog-2":"10.101.128.64"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Mexico",
+		"cities":[
+			{
+				"name":"Queretaro",
+				"config":{
+					"syslog-1":"10.196.32.140",
+					"syslog-2":"10.196.32.141"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Netherlands",
+		"cities":[
+			{
+				"name":"Moerdijk",
+				"config":{
+					"syslog-1":"10.82.64.8",
+					"syslog-2":"10.82.64.9"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"New Zealand",
+		"cities":[
+			{
+				"name":"Hamilton",
+				"config":{
+					"syslog-1":"10.154.161.141",
+					"syslog-2":"10.154.161.142"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Pakistan",
+		"cities":[
+			{
+				"name":"Lahore",
+				"config":{
+					"syslog-1":"10.148.97.217",
+					"syslog-2":"10.148.97.218"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Portugal",
+		"cities":[
+			{
+				"name":"Lisboa",
+				"config":{
+					"syslog-1":"10.105.129.211",
+					"syslog-2":"10.105.129.212"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Russia",
+		"cities":[
+			{
+				"name":"Lobnya",
+				"config":{
+					"syslog-1":"10.84.128.41",
+					"syslog-2":"10.84.128.42"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Saudi Arabia",
+		"cities":[
+			{
+				"name":"Jeddah",
+				"config":{
+					"syslog-1":"10.106.128.137",
+					"syslog-2":"10.106.128.138"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Serbia",
+		"cities":[
+			{
+				"name":"Gornji Milanovac",
+				"config":{
+					"syslog-1":"10.109.192.50",
+					"syslog-2":"10.109.192.51"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"South Africa",
+		"cities":[
+			{
+				"name":"Pinetown",
+				"config":{
+					"syslog-1":"10.83.32.240",
+					"syslog-2":"10.83.32.241"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Spain",
+		"cities":[
+			{
+				"name":"Arganda",
+				"config":{
+					"syslog-1":"10.86.1.66",
+					"syslog-2":"10.86.1.67"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Switzerland",
+		"cities":[
+			{
+				"name":"Romont",
+				"config":{
+					"syslog-1":"10.87.80.30",
+					"syslog-2":"10.87.80.31"
+				}
+			},
+			{
+				"name":"Lausanne",
+				"config":{
+					"syslog-1":"10.87.130.30",
+					"syslog-2":"10.87.130.31"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Taiwan",
+		"cities":[
+			{
+				"name":"Taipei",
+				"config":{
+					"syslog-1":"10.132.1.22",
+					"syslog-2":"10.132.1.23"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Thailand",
+		"cities":[
+			{
+				"name":"Rayong",
+				"config":{
+					"syslog-1":"10.136.64.201",
+					"syslog-2":"10.136.64.202"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Turkey",
+		"cities":[
+			{
+				"name":"Izmir",
+				"config":{
+					"syslog-1":"10.92.33.193",
+					"syslog-2":"10.92.33.194"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Ukraine",
+		"cities":[
+			{
+				"name":"Kiev",
+				"config":{
+					"syslog-1":"10.108.129.26",
+					"syslog-2":"10.108.129.27"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Venezuela",
+		"cities":[
+			{
+				"name":"Mariara",
+				"config":{
+					"syslog-1":"10.208.16.53",
+					"syslog-2":"10.208.16.54"
+				}
+			}
+			
+		]
+		
+	},
+	{
+		"name":"Others (for MC)",
+		"cities":[
+			{
+				"name":"Data Center: Denton",
+				"config":{
+					"syslog-1":"10.192.8.45",
+					"syslog-2":"10.192.8.46"
+				}
+			},
+			{
+				"name":"Data Center: Lund",
+				"config":{
+					"syslog-1":"10.67.1.117",
+					"syslog-2":"10.67.1.118"
+				}
+			},
+			{
+				"name":"Data Center: Singapore",
+				"config":{
+					"syslog-1":"10.138.4.138",
+					"syslog-2":"10.138.4.139"
+				}
+			}
+			
+		]
+		
+	}
+]

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Network Security Baseline Configuration Tool</title>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dijit/themes/claro/claro.css">
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		
+		ul, li {
+			margin: 10px;
+		}
+		
+		label {
+			display: block;
+		}
+		
+		#header {
+			height: 200px;
+			background: lightblue url('motto.png') no-repeat left top;
+		}
+		
+		#header h1 {
+			margin-left: 220px;
+			padding-top: 70px;
+			font-size: 36pt;
+		}
+		
+		#submitPanel {
+			margin-left: 100px;
+		}
+		
+		#templates {
+			display: none;
+		}
+	</style>
+</head>
+<body class="claro">
+	<div id="header">
+		<h1><span>Network Security Baseline Configuration Tool</span></h1>
+	</div>
+	
+	<div id="content">
+		<form id="myForm">
+		<ul>
+			<li>
+				<label for="deviceName">Device Name:</label>
+				<input id="deviceName"></input>
+			</li>
+			<li>
+				<label for="deviceType">Device Type:</label>
+				<input id="deviceType"></input>
+			</li>
+			<li>
+				<label for="secret">Enable Secret Password:</label>
+				<input type="password" id="secret"></input>
+			</li>
+			<li>
+				<label for="infName">Source Interface for Logging and TACACS+:</label>
+				<input id="infName"></input>
+			</li>
+			<li>
+				<label for="country">Country:</label>
+				<input id="country"></input>
+			</li>
+			<li>
+				<label for="city">City:</label>
+				<input id="city"></input>
+			</li>
+			<li>
+				<label>Will Local IT Monitor the Device using a Local SNMP Monitoring Solution?</label>
+				<button id="localMonitor"></button><label for="localMonitor" style="display: inline; vertical-align: middle">Yes</label>
+			</li>
+			<li id="localMonitorPanel">
+				If the answer above was Yes, please fill out fields below:
+				<ul>
+					<li>
+						<label for="snmpIP">IP Address of Local IT Monitoring Solution:</label>
+						<input id="snmpIP"></input>
+					</li>
+					<li>
+						<label for="snmpCommunity">SNMP Community String used by Local IT Monitoring Solution:</label>
+						<input id="snmpCommunity"></input>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		
+		<div id="submitPanel"><input id="submit"/></div>
+		</form>
+	</div>
+
+	<div id="templates">
+		<div id="template_firewall">
+<pre>
+Service password-encryption
+hostname $deviceName
+ip domain-name nvv.net.tetrapak.com
+service timestamps log datetime localtime
+
+enable password $secret
+clear passwd
+
+no http server enable
+
+logging on
+logging timestamp
+trap informational
+logging facility 4
+logging host inside $syslog
+# ntp server 10.67.1.250 prefer
+# ntp server 10.138.1.12
+# ntp server 10.192.4.210
+
+snmp-server community H3lo0fcer
+snmp-server host inside 10.67.1.22 poll
+snmp-server host inside 10.192.4.5 poll
+snmp-server host inside $snmpIP
+
+aaa-server TACACS+ protocol tacacs+
+aaa-server TACACS+ max-failed-attempts 3
+aaa-server TACACS+ deadtime 10
+# aaa-server TACACS+ (inside) host 10.67.4.105 6A4taXunaTre9aTRafuz timeout 50
+# aaa-server TACACS+ (inside) host 10.192.8.121 6A4taXunaTre9aTRafuz timeout 50
+aaa authentication ssh console TACACS+
+aaa authentication serial console TACACS+
+aaa accounting ssh console TACACS+
+
+
+
+</pre>
+		</div>
+		<div id="template_switch">
+<pre>
+Service password-encryption
+hostname $deviceName
+ip domain-name nvv.net.tetrapak.com
+service timestamps log datetime localtime
+
+enable secret $secret
+no enable password
+
+no ip http server
+
+logging on
+logging trap notifications
+logging source-interface $infName
+service timestamps log datetime
+logging buffered 16384 informational
+logging facility local6
+logging $syslog
+# ntp server 10.67.1.250 prefer
+# ntp server 10.138.1.12
+# ntp server 10.192.4.210
+
+access-list 1 permit 10.138.1.0 0.0.0.255
+access-list 1 permit 10.67.1.0 0.0.0.255
+access-list 1 permit 10.67.4.0 0.0.0.255
+access-list 1 permit 10.192.4.0 0.0.0.255
+access-list 2 permit 10.67.1.22
+access-list 2 permit 10.67.4.114
+access-list 2 permit 10.67.4.115
+access-list 2 permit 10.67.4.105
+snmp ifmib ifalias long
+snmp-server community Ixlr8byU RO 1
+snmp-server community H3lo0fcer RW 2
+snmp-server location $city, $country
+access-list 3 permit $snmpIP
+snmp-server community $snmpCommunity RO 3
+
+aaa new-model
+aaa authentication login ADMIN group tacacs+ enable
+ip tacacs source-interface $infName
+# tacacs-server host 10.67.4.105
+# tacacs-server host 10.192.8.121
+# tacacs-server host 10.138.1.66
+no tacacs-server directed-request
+tacacs-server key 6A4taXunaTre9aTRafuz
+line con 0
+login authentication ADMIN
+no password
+line vty 0 4
+login authentication ADMIN
+no password
+exec-timeout 30 0
+line vty 5 15
+login authentication ADMIN
+no password
+exec-timeout 30 0
+
+aaa accounting exec default start-stop tacacs+
+aaa accounting commands 15 default start-stop tacacs+
+
+no aaa authorization exec default local
+aaa authorization exec default group tacacs+ none
+aaa authorization commands 15 default group tacacs+ none
+aaa authorization config-commands
+
+
+</pre>
+		</div>
+		<div id="template_router">
+<pre>
+Service password-encryption
+hostname $deviceName
+ip domain-name nvv.net.tetrapak.com
+service timestamps log datetime localtime
+
+enable secret $secret
+no enable password
+
+no ip http server
+
+logging on
+logging trap notifications
+logging source-interface $infName
+service timestamps log datetime
+logging buffered 16384 informational
+logging facility local7
+logging $syslog
+# ntp server 10.67.1.250 prefer
+# ntp server 10.138.1.12
+# ntp server 10.192.4.210
+
+access-list 1 permit 10.138.1.0 0.0.0.255
+access-list 1 permit 10.67.1.0 0.0.0.255
+access-list 1 permit 10.67.4.0 0.0.0.255
+access-list 1 permit 10.192.4.0 0.0.0.255
+access-list 2 permit 10.67.1.22
+access-list 2 permit 10.67.4.114
+access-list 2 permit 10.67.4.115
+access-list 2 permit 10.67.4.105
+snmp ifmib ifalias long
+snmp-server community Ixlr8byU RO 1
+snmp-server community H3lo0fcer RW 2
+snmp-server location $city, $country
+access-list 3 permit $snmpIP
+snmp-server community $snmpCommunity RO 3
+
+aaa new-model
+aaa authentication login ADMIN group tacacs+ enable
+ip tacacs source-interface $infName
+# tacacs-server host 10.67.4.105
+# tacacs-server host 10.192.8.121
+# tacacs-server host 10.138.1.66
+no tacacs-server directed-request
+tacacs-server key 6A4taXunaTre9aTRafuz
+line con 0
+login authentication ADMIN
+no password
+line vty 0 4
+login authentication ADMIN
+no password
+exec-timeout 30 0
+line vty 5 15
+login authentication ADMIN
+no password
+exec-timeout 30 0
+line aux 0
+login authentication ADMIN
+no password
+
+aaa accounting exec default start-stop tacacs+
+aaa accounting commands 15 default start-stop tacacs+
+
+no aaa authorization exec default local
+aaa authorization exec default group tacacs+ none
+aaa authorization commands 15 default group tacacs+ none
+aaa authorization config-commands
+
+
+</pre>
+		</div>
+		<div id="template_ap">
+<pre>
+Service password-encryption
+hostname $deviceName
+ip domain-name nvv.net.tetrapak.com
+service timestamps log datetime localtime
+
+enable secret $secret
+no enable password
+
+no ip http server
+
+logging on
+logging trap notifications
+logging source-interface $infName
+service timestamps log datetime
+logging buffered 16384 informational
+logging facility local6
+logging $syslog
+# ntp server 10.67.1.250 prefer
+# ntp server 10.138.1.12
+# ntp server 10.192.4.210
+
+access-list 1 permit 10.138.1.0 0.0.0.255
+access-list 1 permit 10.67.1.0 0.0.0.255
+access-list 1 permit 10.67.4.0 0.0.0.255
+access-list 1 permit 10.192.4.0 0.0.0.255
+access-list 2 permit 10.67.1.22
+access-list 2 permit 10.67.4.114
+access-list 2 permit 10.67.4.115
+access-list 2 permit 10.67.4.105
+snmp ifmib ifalias long
+snmp-server community Ixlr8byU RO 1
+snmp-server community H3lo0fcer RW 2
+snmp-server location $city, $country
+access-list 3 permit $snmpIP
+snmp-server community $snmpCommunity RO 3
+
+aaa new-model
+aaa authentication login ADMIN group tacacs+ enable
+ip tacacs source-interface $infName
+# tacacs-server host 10.67.4.105
+# tacacs-server host 10.192.8.121
+# tacacs-server host 10.138.1.66
+no tacacs-server directed-request
+tacacs-server key 6A4taXunaTre9aTRafuz
+line con 0
+login authentication ADMIN
+no password
+line vty 0 4
+login authentication ADMIN
+no password
+exec-timeout 30 0
+line vty 5 15
+login authentication ADMIN
+no password
+exec-timeout 30 0
+
+radius-server authorization permit missing Service-Type
+ip radius source-interface $infName
+
+aaa accounting exec default start-stop tacacs+
+aaa accounting commands 15 default start-stop tacacs+
+
+no aaa authorization exec default local
+aaa authorization exec default group tacacs+ none
+aaa authorization commands 15 default group tacacs+ none
+aaa authorization config-commands
+
+
+</pre>
+		</div>
+	</div>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js" data-dojo-config="async: true"></script>
+	<script src="main.js"></script>
+</body>
+</html>
