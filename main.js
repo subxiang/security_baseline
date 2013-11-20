@@ -148,7 +148,19 @@ require(['dijit/form/Form', 'dojo/json', 'dojo/text!./syslogCfg.json', 'dijit/Di
 		}
 
 		function generate(template, params){
-		    return template.replace(/\$(\w*)/g,function(m,key){return params.hasOwnProperty(key) ? params[key] : "";});
+			return template.replace(/^.*$/gm, function(line) {
+		        var m = line.match(/\$(\w+)/);
+		        if (m) {
+		            if (params[m[1]] instanceof Array) {
+		                return params[key].map(function(value) {
+		                    return line.replace(m[0], value);
+		                }).join("\n");
+		            } else {
+		                return line.replace(m[0], params[m[1]]);
+		            }
+		        }
+		        return line;
+		    });
 		}
 
 		function getTemplate(deviceType) {
