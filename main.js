@@ -152,7 +152,7 @@ require(['dijit/form/Form', 'dojo/json', 'dojo/text!./syslogCfg.json', 'dijit/Di
 		        		if (value instanceof Array) {
 			                return value.map(function(item) {
 			                    return line.replace(m[0], item);
-			                }).join("\n");
+			                }).join("");
 			            } else {
 			                return line.replace(m[0], value);
 			            }
