@@ -118,10 +118,8 @@ logging on
 logging timestamp
 trap informational
 logging facility 4
-logging host inside $syslog
-# ntp server 10.67.1.250 prefer
-# ntp server 10.138.1.12
-# ntp server 10.192.4.210
+logging host inside $syslog1
+ntp server $ntp
 
 snmp-server community H3lo0fcer
 snmp-server host inside 10.67.1.22 poll
@@ -131,8 +129,7 @@ snmp-server host inside $snmpIP
 aaa-server TACACS+ protocol tacacs+
 aaa-server TACACS+ max-failed-attempts 3
 aaa-server TACACS+ deadtime 10
-# aaa-server TACACS+ (inside) host 10.67.4.105 6A4taXunaTre9aTRafuz timeout 50
-# aaa-server TACACS+ (inside) host 10.192.8.121 6A4taXunaTre9aTRafuz timeout 50
+aaa-server TACACS+ (inside) host $tacacs 6A4taXunaTre9aTRafuz timeout 50
 aaa authentication ssh console TACACS+
 aaa authentication serial console TACACS+
 aaa accounting ssh console TACACS+

@@ -88,6 +88,8 @@ require(['dijit/form/Form', 'dojo/json', 'dojo/text!./syslogCfg.json', 'dijit/Di
 						infName: '',
 						country: '',
 						city: '',
+						ntp: '',
+						tacacs: '',
 						snmpIP: '',
 						snmpCommunity: ''
 					};
@@ -97,12 +99,8 @@ require(['dijit/form/Form', 'dojo/json', 'dojo/text!./syslogCfg.json', 'dijit/Di
 					}
 
 					var cfg = dijit.byId('city').get('item')['config'];
-
-					var deviceType = params['deviceType'];
-					if (deviceType == 'DT_SWITCH' || deviceType == 'DT_ROUTER') {
-						params['syslog'] = cfg['syslog-1'];
-					} else {
-						params['syslog'] = cfg['syslog-2'];
+					for (var key in cfg) {
+						params[key] = cfg[key];
 					}
 
 					var output = new Dialog({
@@ -151,15 +149,21 @@ require(['dijit/form/Form', 'dojo/json', 'dojo/text!./syslogCfg.json', 'dijit/Di
 			return template.replace(/^.*$/gm, function(line) {
 		        var m = line.match(/\$(\w+)/);
 		        if (m) {
-		            if (params[m[1]] instanceof Array) {
-		                return params[key].map(function(value) {
-		                    return line.replace(m[0], value);
-		                }).join("\n");
-		            } else {
-		                return line.replace(m[0], params[m[1]]);
-		            }
+		        	var value = params[m[1]];
+		        	if (value) {
+		        		if (value instanceof Array) {
+			                return value.map(function(item) {
+			                    return line.replace(m[0], item);
+			                }).join("\n");
+			            } else {
+			                return line.replace(m[0], value);
+			            }
+		        	} else {
+		        		return "";
+		        	}
+		        } else {
+		        	return line;
 		        }
-		        return line;
 		    });
 		}
 
