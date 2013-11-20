@@ -144,7 +144,7 @@ require(['dijit/form/Form', 'dojo/json', 'dojo/text!./syslogCfg.json', 'dijit/Di
 		}
 
 		function generate(template, params){
-			return template.replace(/^.*$/gm, function(line) {
+			return template.replace(/^.*\n$/gm, function(line) {
 		        var m = line.match(/\$(\w+)/);
 		        if (m) {
 		        	var value = params[m[1]];
