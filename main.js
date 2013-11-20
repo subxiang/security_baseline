@@ -88,8 +88,6 @@ require(['dijit/form/Form', 'dojo/json', 'dojo/text!./syslogCfg.json', 'dijit/Di
 						infName: '',
 						country: '',
 						city: '',
-						ntp: '',
-						tacacs: '',
 						snmpIP: '',
 						snmpCommunity: ''
 					};
