@@ -103,7 +103,7 @@ require(['dijit/form/Form', 'dojo/json', 'dojo/text!./syslogCfg.json', 'dijit/Di
 
 					var output = new Dialog({
 						title: "Baseline Configuration for Device <b>" + params['deviceName'] + "</b> (Click to Select All)",
-						content: generate(getTemplate(deviceType), params),
+						content: generate(getTemplate(params['deviceType']), params),
 						onClick: function() {
 							selectText(this.domNode.querySelector('pre'));
 						}
