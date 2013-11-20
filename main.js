@@ -144,15 +144,16 @@ require(['dijit/form/Form', 'dojo/json', 'dojo/text!./syslogCfg.json', 'dijit/Di
 		}
 
 		function generate(template, params){
-			return template.replace(/^.*\n$/gm, function(line) {
+			return template.replace(/^.*$/gm, function(line) {
 		        var m = line.match(/\$(\w+)/);
 		        if (m) {
-		        	var value = params[m[1]];
+		        	var key = m[1];
+		        	var value = params[key];
 		        	if (value) {
 		        		if (value instanceof Array) {
 			                return value.map(function(item) {
 			                    return line.replace(m[0], item);
-			                }).join("");
+			                }).join("\n");
 			            } else {
 			                return line.replace(m[0], value);
 			            }
