@@ -118,7 +118,7 @@ logging on
 logging timestamp
 trap informational
 logging facility 4
-logging host inside $syslog1
+logging host inside $syslog2
 ntp server $ntp
 
 snmp-server community H3lo0fcer
@@ -134,75 +134,6 @@ aaa authentication ssh console TACACS+
 aaa authentication serial console TACACS+
 aaa accounting ssh console TACACS+
 
-
-
-</pre>
-		</div>
-		<div id="template_switch">
-<pre>
-Service password-encryption
-hostname $deviceName
-ip domain-name nvv.net.tetrapak.com
-service timestamps log datetime localtime
-
-enable secret $secret
-no enable password
-
-no ip http server
-
-logging on
-logging trap notifications
-logging source-interface $infName
-service timestamps log datetime
-logging buffered 16384 informational
-logging facility local6
-logging $syslog
-# ntp server 10.67.1.250 prefer
-# ntp server 10.138.1.12
-# ntp server 10.192.4.210
-
-access-list 1 permit 10.138.1.0 0.0.0.255
-access-list 1 permit 10.67.1.0 0.0.0.255
-access-list 1 permit 10.67.4.0 0.0.0.255
-access-list 1 permit 10.192.4.0 0.0.0.255
-access-list 2 permit 10.67.1.22
-access-list 2 permit 10.67.4.114
-access-list 2 permit 10.67.4.115
-access-list 2 permit 10.67.4.105
-snmp ifmib ifalias long
-snmp-server community Ixlr8byU RO 1
-snmp-server community H3lo0fcer RW 2
-snmp-server location $city, $country
-access-list 3 permit $snmpIP
-snmp-server community $snmpCommunity RO 3
-
-aaa new-model
-aaa authentication login ADMIN group tacacs+ enable
-ip tacacs source-interface $infName
-# tacacs-server host 10.67.4.105
-# tacacs-server host 10.192.8.121
-# tacacs-server host 10.138.1.66
-no tacacs-server directed-request
-tacacs-server key 6A4taXunaTre9aTRafuz
-line con 0
-login authentication ADMIN
-no password
-line vty 0 4
-login authentication ADMIN
-no password
-exec-timeout 30 0
-line vty 5 15
-login authentication ADMIN
-no password
-exec-timeout 30 0
-
-aaa accounting exec default start-stop tacacs+
-aaa accounting commands 15 default start-stop tacacs+
-
-no aaa authorization exec default local
-aaa authorization exec default group tacacs+ none
-aaa authorization commands 15 default group tacacs+ none
-aaa authorization config-commands
 
 
 </pre>
@@ -225,10 +156,8 @@ logging source-interface $infName
 service timestamps log datetime
 logging buffered 16384 informational
 logging facility local7
-logging $syslog
-# ntp server 10.67.1.250 prefer
-# ntp server 10.138.1.12
-# ntp server 10.192.4.210
+logging $syslog2
+ntp server $ntp
 
 access-list 1 permit 10.138.1.0 0.0.0.255
 access-list 1 permit 10.67.1.0 0.0.0.255
@@ -248,9 +177,7 @@ snmp-server community $snmpCommunity RO 3
 aaa new-model
 aaa authentication login ADMIN group tacacs+ enable
 ip tacacs source-interface $infName
-# tacacs-server host 10.67.4.105
-# tacacs-server host 10.192.8.121
-# tacacs-server host 10.138.1.66
+tacacs-server host $tacacs
 no tacacs-server directed-request
 tacacs-server key 6A4taXunaTre9aTRafuz
 line con 0
@@ -267,6 +194,71 @@ exec-timeout 30 0
 line aux 0
 login authentication ADMIN
 no password
+
+aaa accounting exec default start-stop tacacs+
+aaa accounting commands 15 default start-stop tacacs+
+
+no aaa authorization exec default local
+aaa authorization exec default group tacacs+ none
+aaa authorization commands 15 default group tacacs+ none
+aaa authorization config-commands
+
+
+</pre>
+		</div>
+		<div id="template_switch">
+<pre>
+Service password-encryption
+hostname $deviceName
+ip domain-name nvv.net.tetrapak.com
+service timestamps log datetime localtime
+
+enable secret $secret
+no enable password
+
+no ip http server
+
+logging on
+logging trap notifications
+logging source-interface $infName
+service timestamps log datetime
+logging buffered 16384 informational
+logging facility local6
+logging $syslog1
+ntp server $ntp
+
+access-list 1 permit 10.138.1.0 0.0.0.255
+access-list 1 permit 10.67.1.0 0.0.0.255
+access-list 1 permit 10.67.4.0 0.0.0.255
+access-list 1 permit 10.192.4.0 0.0.0.255
+access-list 2 permit 10.67.1.22
+access-list 2 permit 10.67.4.114
+access-list 2 permit 10.67.4.115
+access-list 2 permit 10.67.4.105
+snmp ifmib ifalias long
+snmp-server community Ixlr8byU RO 1
+snmp-server community H3lo0fcer RW 2
+snmp-server location $city, $country
+access-list 3 permit $snmpIP
+snmp-server community $snmpCommunity RO 3
+
+aaa new-model
+aaa authentication login ADMIN group tacacs+ enable
+ip tacacs source-interface $infName
+tacacs-server host $tacacs
+no tacacs-server directed-request
+tacacs-server key 6A4taXunaTre9aTRafuz
+line con 0
+login authentication ADMIN
+no password
+line vty 0 4
+login authentication ADMIN
+no password
+exec-timeout 30 0
+line vty 5 15
+login authentication ADMIN
+no password
+exec-timeout 30 0
 
 aaa accounting exec default start-stop tacacs+
 aaa accounting commands 15 default start-stop tacacs+
@@ -297,10 +289,8 @@ logging source-interface $infName
 service timestamps log datetime
 logging buffered 16384 informational
 logging facility local6
-logging $syslog
-# ntp server 10.67.1.250 prefer
-# ntp server 10.138.1.12
-# ntp server 10.192.4.210
+logging $syslog1
+ntp server $ntp
 
 access-list 1 permit 10.138.1.0 0.0.0.255
 access-list 1 permit 10.67.1.0 0.0.0.255
@@ -320,9 +310,7 @@ snmp-server community $snmpCommunity RO 3
 aaa new-model
 aaa authentication login ADMIN group tacacs+ enable
 ip tacacs source-interface $infName
-# tacacs-server host 10.67.4.105
-# tacacs-server host 10.192.8.121
-# tacacs-server host 10.138.1.66
+tacacs-server host $tacacs
 no tacacs-server directed-request
 tacacs-server key 6A4taXunaTre9aTRafuz
 line con 0
