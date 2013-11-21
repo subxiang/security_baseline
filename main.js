@@ -144,25 +144,22 @@ require(['dijit/form/Form', 'dojo/json', 'dojo/text!./syslogCfg.json', 'dijit/Di
 		}
 
 		function generate(template, params){
-			return template.replace(/^.*$/gm, function(line) {
-		        var m = line.match(/\$(\w+)/);
-		        if (m) {
-		        	var key = m[1];
-		        	var value = params[key];
-		        	if (value) {
-		        		if (value instanceof Array) {
-			                return value.map(function(item) {
-			                    return line.replace(m[0], item);
-			                }).join("\n");
-			            } else {
-			                return line.replace(m[0], value);
-			            }
-		        	} else {
-		        		return "";
-		        	}
-		        } else {
-		        	return line;
-		        }
+			template = template.replace(/\$(\w+)/g, function(word, key) {
+				if (!params[key] || params[key] instanceof Array) {
+					return word;
+				} else {
+					return params[key];
+				}
+			});
+
+			return template.replace(/^.*\$(\w+).*$/gm, function(line, key) {
+	        	if (params[key]) {
+	        		return params[key].map(function(item) {
+	                    return line.replace("$" + key, item);
+	                }).join("\n");
+	        	} else {
+	        		return "";
+	        	}
 		    });
 		}
 
