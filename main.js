@@ -8,7 +8,7 @@ var deviceTypes = [
     {id : 'DT_SWITCH', label : 'Switch'} ];
 
 
-require(['dijit/form/Form', 'dojo/json', 'dojo/text!./syslogCfg.json', 'dijit/Dialog', 'dijit/form/TextBox', 'dijit/form/ValidationTextBox', 'dijit/form/Button', 'dijit/form/CheckBox', 'dijit/form/Select', 'dijit/form/FilteringSelect', 'dojo/data/ObjectStore', 'dojo/store/Memory', 'dojo/dom', 'dojo/ready'],
+require(['dijit/form/Form', 'dojo/json', 'dojo/text!./syslogCfg.js', 'dijit/Dialog', 'dijit/form/TextBox', 'dijit/form/ValidationTextBox', 'dijit/form/Button', 'dijit/form/CheckBox', 'dijit/form/Select', 'dijit/form/FilteringSelect', 'dojo/data/ObjectStore', 'dojo/store/Memory', 'dojo/dom', 'dojo/ready'],
 	function(Form, JSON, syslogCfg, Dialog, TextBox, ValidationTextBox, Button, CheckBox, Select, FilteringSelect, ObjectStore, Memory, dom, ready) {
 
 	ready(function() {
