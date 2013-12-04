@@ -107,9 +107,9 @@ require(['dijit/form/Form', 'dojo/json', 'dojo/text!./syslogCfg.js', 'dijit/Dial
 		}, 'secret');
 
 		var infName = new ValidationTextBox({
-			pattern: '\\w+',
-			invalidMessage: 'Invalid interface name',
-			lowercase: true,
+//			pattern: '\\w+',
+//			invalidMessage: 'Invalid interface name',
+//			lowercase: true,
 			placeHolder: 'e.g., vnet1',
 			required: true
 		}, 'infName');
